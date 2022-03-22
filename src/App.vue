@@ -92,8 +92,8 @@ function drawBranch(b: Branch) {
 onMounted(() => {
   init()
   setTimeout(() => {
-    // location.reload()
-  }, 2000)
+    location.reload()
+  }, 10000)
 })
 </script>
 
