@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { isDark } from './composables'
+
 const el = $ref<HTMLCanvasElement>()
 const ctx = $computed(() => el!.getContext('2d')!)
 
@@ -17,7 +19,9 @@ interface Branch {
 }
 
 function init() {
-  ctx.strokeStyle = '#fff'
+  let color = '#fff'
+  if (!isDark.value) color = '#121212'
+  ctx.strokeStyle = color
 
   step({
     start: { x: WIDTH / 2, y: HEIGHT },
@@ -36,14 +40,14 @@ function step(b: Branch, depth = 0) {
     pendingTasks.push(() => step({
       start: end,
       length: b.length + (Math.random() * 10 - 5),
-      theta: b.theta - 0.6 * Math.random(),
+      theta: b.theta - 0.4 * Math.random(),
     }, depth + 1))
   }
   if (depth < 4 || Math.random() < 0.5) {
     pendingTasks.push(() => step({
       start: end,
       length: b.length + (Math.random() * 10 - 5),
-      theta: b.theta + 0.6 * Math.random(),
+      theta: b.theta + 0.4 * Math.random(),
     }, depth + 1))
   }
 }
@@ -87,9 +91,23 @@ function drawBranch(b: Branch) {
 
 onMounted(() => {
   init()
+  setTimeout(() => {
+    // location.reload()
+  }, 2000)
 })
 </script>
 
 <template>
-  <canvas ref="el" width="400" height="400" border />
+  <main
+    font-sans p="x-4 y-10" text="center gray-700 dark:gray-200"
+  >
+    <div
+      mt-80px
+      flex="~"
+      items-center justify-center
+    >
+      <canvas ref="el" width="300" height="300" border />
+    </div>
+    <Footer />
+  </main>
 </template>
