@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isDark } from './composables'
+// import { isDark } from './composables'
 
 const el = $ref<HTMLCanvasElement>()
 const ctx = $computed(() => el!.getContext('2d')!)
@@ -19,13 +19,13 @@ interface Branch {
 }
 
 function init() {
-  let color = '#fff'
-  if (!isDark.value) color = '#121212'
-  ctx.strokeStyle = color
+  // let color = '#fff'
+  // if (!isDark.value) color = 'gray'
+  ctx.strokeStyle = 'gray'
 
   step({
     start: { x: WIDTH / 2, y: HEIGHT },
-    length: 20,
+    length: 30,
     theta: -Math.PI / 2,
   })
 }
@@ -93,7 +93,7 @@ onMounted(() => {
   init()
   setTimeout(() => {
     location.reload()
-  }, 10000)
+  }, 5000)
 })
 </script>
 
@@ -106,7 +106,7 @@ onMounted(() => {
       flex="~"
       items-center justify-center
     >
-      <canvas ref="el" width="300" height="300" border />
+      <canvas ref="el" width="400" height="400" />
     </div>
     <Footer />
   </main>
