@@ -106,7 +106,7 @@ onMounted(() => {
       flex="~"
       items-center justify-center
     >
-      <canvas ref="el" width="400" height="400" />
+      <canvas ref="el" width="400" height="400" border />
     </div>
     <Footer />
   </main>
